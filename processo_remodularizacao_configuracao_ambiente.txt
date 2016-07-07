@@ -1,0 +1,83 @@
+==================================
+
+1. Download Moose: http://www.moosetechnology.org
+
+
+2. Baixar última versão Famix-SourceAnchor > Load
+
+MCSmalltalkhubRepository
+	owner: 'Moose'
+	project: 'Moose'
+	user: ''
+	password: ''
+
+
+3. Baixar BabyMock2
+
+MCHttpRepository
+	location: 'http://smalltalkhub.com/mc/zeroflag/BabyMock2/main'
+	user: ''
+	password: ''
+
+ConfigurationOfBabyMock2 load.
+
+
+4. Baixar Famix-Blocks > Load
+
+MCSmalltalkhubRepository
+    owner: 'Moose'
+    project: 'Famix'
+    user: ''
+    password: ''
+
+
+5. Baixar FASTCore
+
+MCHttpRepository
+	location: 'http://smalltalkhub.com/mc/Moose/FASTCore/main'
+	user: ''
+	password: ''
+
+ConfigurationOfFASTCore load.
+
+
+
+6. Baixar RemodularizationApproach files
+
+MCHttpRepository
+	location: 'http://smalltalkhub.com/mc/RicardoTerra/RemodularizationApproach/main'
+	user: ''
+	password: ''
+
+
+7. Atualizar Roassal2 (versão igual ou superior à 826).
+
+
+8. Executar: MooseModel resetMeta
+
+
+9. Executar testes em Famix-Tests-Blocks
+
+
+10. Importar argouml-0.22.mse e "Set root folder".
+    Aponte para o diretório que contém o dir. argouml-0.22.
+
+
+11. Existe um bug que não deixa importar "numberOfLinesOfCode".
+     Para solucioná-lo, execute:
+
+((MooseModel root select: [ :each | each name = 'argouml-0.22']) anyOne allMethods) do:
+[ :each |
+	(each numberOfLinesOfCode <= 0) ifTrue:
+	[ (each numberOfLinesOfCode: (each numberOfLinesOfCodeWithMoreThanOneCharacter )) ].
+].
+
+
+12. Para visualização Extract Method:
+
+BlockBasedVisualizations findExtractMethodOpportunitiesIn: ((MooseModel root select: [ :each | each name = 'argouml-0.22']) anyOne allMethods) consideringDependencySetLargerThan: 3 withThreshold: 0.40.
+
+
+13. Para visualização Move Method:
+
+BlockBasedVisualizations findMoveMethodOpportunitiesIn: ((MooseModel root select: [ :each | each name = 'argouml-0.22']) anyOne allMethods) consideringDependencySetLargerThan: 3 withThreshold: 0.40.
